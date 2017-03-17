@@ -15,8 +15,11 @@ import model.entities.Cycliste;
 
 public class TestSerialisation {
 
+	/**
+	 * Si je ne veux pas Serialiser un élément, je peux ajouter l'atribut transient à l'attribut de classe.
+	 */
 	@Test
-	public void testSerialisationCycliste() throws IOException {
+	public void testSerialisationCycliste() {
 		Cycliste riri = new Cycliste();
 		riri.setPrenom("Riri");
 		riri.setNom("Riri");
@@ -24,27 +27,33 @@ public class TestSerialisation {
 		riri.setNumeroLicenceFFC("NUMEROLICENCEFFC");
 		riri.setEquipe(null);
 
-		Path path = Paths.get("/tmp/testSerialisationCycliste.txt");
+		try (ObjectOutputStream oos = new ObjectOutputStream(
+				Files.newOutputStream(Paths.get("/tmp/testSerialisationCycliste.txt")))) {
 
-		OutputStream os = Files.newOutputStream(path);
-		ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject(riri);
+			oos.flush();
 
-		oos.writeObject(riri);
+		} catch (IOException e) {
+			System.out.println("Et paf le Java... impossible d'écrire le fichier.");
+		}
 
-		oos.flush();
 	}
 
 	@Test
-	public void testDeSerialisationCycliste() throws IOException, ClassNotFoundException {
-		Cycliste ririFromDisk = new Cycliste();
+	public void testDeSerialisationCycliste() {
+		Cycliste ririFromDisk;
 
-		Path path = Paths.get("/tmp/testSerialisationCycliste.txt");
+		try (ObjectInputStream ois = new ObjectInputStream(
+				Files.newInputStream(Paths.get("/tmp/testSerialisationCycliste.txt")))) {
 
-		InputStream is = Files.newInputStream(path);
-		ObjectInputStream ois = new ObjectInputStream(is);
+			ririFromDisk = (Cycliste) ois.readObject();
+			System.out.println(ririFromDisk);
 
-		ririFromDisk = (Cycliste) ois.readObject();
-		System.out.println(ririFromDisk);
+		} catch (IOException e) {
+			System.out.println("Et paf le Java... impossible de lire le fichier.");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Et paf le Java... classe Cycliste introuvable.");
+		}
 
 	}
 
