@@ -14,9 +14,9 @@ public final class Fabrique {
 		return retour;
 	}
 	
-	creerEntraineur
+//	creerEntraineur
 	
-	creerEquipe
+//	creerEquipe
 	
 	
 	
