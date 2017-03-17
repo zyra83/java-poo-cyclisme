@@ -1,12 +1,16 @@
 package model.entities;
 
+import java.io.Serializable;
+
 /**
  * Un Cycliste, membre d'une équipe.
  * @author VOTRE_NOM
  *
  */
-public class Cycliste extends AMembre {
+public class Cycliste extends AMembre implements Serializable {
 
+	private static final long serialVersionUID = -6823229676085406271L;
+	
 	private int classement;
 
 	/**

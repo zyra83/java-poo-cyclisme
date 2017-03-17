@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.io.Serializable;
+
 /**
  * Un membre de la fédération cycliste. À ce titre il a un numéro de licence
  * unique qui permet de l'identifier. Un membre étant forcement Cycliste ou
@@ -9,7 +11,11 @@ package model.entities;
  * @author VOTRE_NOM
  *
  */
-public abstract class AMembre {
+public abstract class AMembre implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5041653430688712176L;
 	private String nom;
 	private String prenom;
 	/**
