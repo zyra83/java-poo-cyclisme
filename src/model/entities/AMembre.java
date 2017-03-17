@@ -26,7 +26,8 @@ public abstract class AMembre implements Serializable {
 	/**
 	 * L'equipe dans laquelle est engagé le memebre.
 	 */
-	private Equipe equipe;
+	
+	private transient Equipe equipe;
 
 	// accesseurs
 
