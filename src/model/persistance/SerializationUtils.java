@@ -19,6 +19,7 @@ public final class SerializationUtils {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T load(String chemin) throws IOException, ClassNotFoundException {
 		try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(chemin)))) {
 			return (T) ois.readObject();
